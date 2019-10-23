@@ -8,7 +8,7 @@ It is now possible to export XML from .NET DataStore or import XML into .NET Dat
 
 First, you can run a sample project to experience the process of exporting .NET DataStore data to XML with or without template:
 
-1. Download the sample project from: <https://github.com/Appeon/.NET-DataStore-XML-Export-Example>.
+1. Download the sample project from: <https://github.com/Appeon/.NETDataStore-XML-Export-Example>.
 
 2. Load the sample project XmlDataDemo.sln in SnapDevelop.
 
