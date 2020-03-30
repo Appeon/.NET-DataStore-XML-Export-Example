@@ -1,6 +1,8 @@
 # Using Export Templates for XML or JSON Export
 
-##  Overview
+Last Updated: March 2020
+
+##  Introduction
 
 It is now possible to export XML from .NET DataStore or import XML into .NET DataStore, or use templates to export XML or JSON from .NET DataStore or SnapObjects models. This document explains how to define an export template for exporting data from .NET DataStore or SnapObjects models to XML or JSON. The export template features simplified syntax, and is database-transparent and data format-transparent.
 
@@ -59,7 +61,7 @@ First, you can run a sample project to experience the process of exporting .NET 
 
 Example 1:
 
-```
+```C#
 @(id)
 ```
 
@@ -67,7 +69,7 @@ Example 1:
 
 Example 2:
 
-```
+```C#
 @("hello" + name + count(id) ?? 'failed')
 ```
 
@@ -77,7 +79,7 @@ Use this syntax to output the concatenation of "hello", the value of name, and t
 
 **Syntax**
 
-```
+```C#
 @foreach(source orderby("") groupby("" orderby("")) into item) { }	
 ```
 
@@ -96,7 +98,7 @@ The @foreach() syntax iterates over a set of data and outputs the specified cont
 
 Example 1:
 
-```
+```C#
 @foreach
 {
   @(id)
@@ -107,7 +109,7 @@ Use this syntax to iterate the current model and use the data from each iteratio
 
 Example 2:
 
-```
+```C#
 @foreach(groupby(”stateprovinceid”) into group1)
 {
 @foreach(group1 orderby(“city d”) groupby(”city” orderby(“#1 D”) ) into group2) 
@@ -132,15 +134,15 @@ This example contains three iteration loops:
 
 **Syntax**
 
-```
+```C#
 @partial(name)
 ```
 
--   Use this syntax to export the specified data using the current export template.
+Use this syntax to export the specified data using the current export template.
 
 **Example**
 
-```
+```C#
 @partial(dw_1)
 ```
 
@@ -152,7 +154,7 @@ For the syntax that is not covered in the above sections, the data will be expor
 
 ## Converting PB template to export template
 
-When you use the DataWindow converter to export DWs to .NET DataStore, you will be asked whether to export templates and to which folder to save the exported templates.
+When you use the DataWindow converter to export a DataWindow to .NET DataStore and the DataWindow is associated with a template, the template will be directly exported along with the .NET DataStore.
 
 **Convert expressions (XML template)**
 
@@ -168,7 +170,7 @@ The \_\_pbband=\"group\" will be converted to @foreach (groupby("" order="")) { 
 
 **Export using specified template**
 
-```
+```C#
 // Create a DataStore object
 var ds = new DataStore("d_address2", _context);
 // Retrieve data in the DataStore 
@@ -193,14 +195,14 @@ This example executes the Export() method using the template defined in grid.xml
 
 For example:
 
-```
+```C#
 [DataWindow("d_address_"2", DwStyle.Grid )]
-[DwTemplate(DataFormat.Xml, "tx2", "adventureworkstables.pbw\\adventureworkstables \\d_address_g2.tpl.tx2.xml", IsDefault = true)]
+[DwTemplate(DataFormat.Xml, "tx2", "adventureworkstables.pbw\\adventureworkstables\\d_address_g2.tpl.tx2.xml", IsDefault = true)]
 ```
 
 The export script is as below:
 
-```
+```C#
 var ds = new DataStore("d_address_g2", _context);
 ds.Retrieve();
 
@@ -214,7 +216,7 @@ In this example, the export method does not specify a template for export. In su
 
 **Exporting ModelEntry data**
 
-```
+```C#
 // Read the packed data
 var data = File.ReadAllText("data.xml");
 // Create an unpacker
@@ -234,7 +236,7 @@ var xml = exporter.Export(tempalte);
 
 **Exporting common model**
 
-```
+```C#
 // Load data from a Model
 List<SalesOrderDetail> models = _context.SqlModelMapper
     .LoadAll<SalesOrderDetail>()
