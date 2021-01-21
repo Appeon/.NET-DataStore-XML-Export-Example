@@ -1,6 +1,6 @@
 # Using Export Templates for XML or JSON Export
 
-Last Updated: March 2020
+Last Updated: January 2021
 
 ##  Introduction
 
@@ -196,7 +196,7 @@ This example executes the Export() method using the template defined in grid.xml
 For example:
 
 ```C#
-[DataWindow("d_address_"2", DwStyle.Grid )]
+[DataWindow("d_address_2", DwStyle.Grid )]
 [DwTemplate(DataFormat.Xml, "tx2", "adventureworkstables.pbw\\adventureworkstables\\d_address_g2.tpl.tx2.xml", IsDefault = true)]
 ```
 
